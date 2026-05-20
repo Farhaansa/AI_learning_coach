@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Coach & Intervention System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="topbar">
+        <div class="brand">
+            <span class="icon">🌌</span> Learning Coach AI
+        </div>
+        <div class="metrics-bar">
+            <div class="metric-pill success">
+                <span class="label">Struggle Score:</span>
+                <span class="value" id="metric-score">0</span>
+            </div>
+            <div class="metric-pill">
+                <span class="label">Iteration:</span>
+                <span class="value" id="metric-iteration">0</span>
+            </div>
+            <div class="metric-pill warning">
+                <span class="label">Mastery:</span>
+                <span class="value" id="metric-mastery">NO</span>
+            </div>
+        </div>
+        <button id="btn-start-demo" class="metric-pill" style="cursor:pointer; background:rgba(99,179,237,0.1); border-color:var(--cyan); color:var(--cyan)">▶ Start Demo</button>
+        <button id="btn-reset">↺ Reset Session</button>
+    </div>
+
+    <div id="app">
+        <!-- LEFT PANEL: Student Simulator -->
+        <div class="panel" id="student-panel">
+            <div class="panel-title"><span class="icon">🎓</span> Student Simulator</div>
+            
+            <div class="question-card">
+                <div class="question-num" id="question-num">Question 1</div>
+                <div class="question-text" id="question-text">Loading question...</div>
+                
+                <div class="timer-bar"><div class="timer-fill" style="width: 100%;"></div></div>
+                
+                <div class="signal-row">
+                    <button class="signal-btn" id="btn-hesitate">🤔 Hesitate</button>
+                    <button class="signal-btn" id="btn-hint">💡 Request Hint</button>
+                </div>
+                
+                <div class="options" id="options-container">
+                    <!-- Options injected here -->
+                </div>
+                <button id="btn-next">Next Question →</button>
+            </div>
+
+            <div class="snapshot-card">
+                <div class="panel-title" style="margin-bottom:8px; font-size:11px;">Knowledge Snapshot</div>
+                <div id="snapshot-title" class="snapshot-title">Concept: Loading...</div>
+                <div id="concept-bars">
+                    <!-- Concept accuracy injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CENTER PANEL: Agent Pipeline -->
+        <div class="panel" id="pipeline-panel">
+            <div class="pipeline-header">
+                <div class="panel-title" style="margin:0;"><span class="icon">⚡</span> Agent Pipeline</div>
+            </div>
+            <div class="pipeline-progress"><div class="pipeline-progress-fill" id="pipeline-progress-fill" style="width: 0%;"></div></div>
+
+            <!-- Agent 1 -->
+            <div class="agent-card" id="agent-behavior">
+                <div class="agent-header">
+                    <span class="agent-icon">👁️</span>
+                    <span class="agent-name">Behavior Analysis</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-1"></div>
+
+            <!-- Agent 2 -->
+            <div class="agent-card" id="agent-struggle">
+                <div class="agent-header">
+                    <span class="agent-icon">🌡️</span>
+                    <span class="agent-name">Struggle Detection</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-2"></div>
+
+            <!-- Agent 3 -->
+            <div class="agent-card" id="agent-diagnosis">
+                <div class="agent-header">
+                    <span class="agent-icon">🧩</span>
+                    <span class="agent-name">Diagnosis</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-3"></div>
+
+            <!-- Agent 4 -->
+            <div class="agent-card" id="agent-intervention">
+                <div class="agent-header">
+                    <span class="agent-icon">🎯</span>
+                    <span class="agent-name">Intervention Strategy</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-4"></div>
+
+            <!-- Agent 5 -->
+            <div class="agent-card" id="agent-tutor">
+                <div class="agent-header">
+                    <span class="agent-icon">🤖</span>
+                    <span class="agent-name">AI Tutor Content</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-5"></div>
+
+            <!-- Agent 6 -->
+            <div class="agent-card" id="agent-evaluation">
+                <div class="agent-header">
+                    <span class="agent-icon">📊</span>
+                    <span class="agent-name">Evaluation</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+            <div class="connector" id="conn-6"></div>
+
+            <!-- Agent 7 -->
+            <div class="agent-card" id="agent-validation">
+                <div class="agent-header">
+                    <span class="agent-icon">✅</span>
+                    <span class="agent-name">Validation Checklist</span>
+                    <span class="agent-badge badge-idle">IDLE</span>
+                </div>
+                <div class="agent-output">Waiting...</div>
+                <div class="agent-logs"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL: Coaching & Diff -->
+        <div class="panel" id="coaching-panel">
+            <div class="panel-title"><span class="icon">💬</span> Coaching Output</div>
+            <div id="coaching-container">
+                <div class="empty-state">
+                    <span class="icon">🤖</span>
+                    <p>Waiting for student interaction...</p>
+                </div>
+            </div>
+
+            <div class="panel-title" style="margin-top: 24px;"><span class="icon">📋</span> Validation Checklist</div>
+            <div id="checklist-container">
+                 <!-- Validation items injected here -->
+            </div>
+
+            <div class="panel-title" style="margin-top: 24px;"><span class="icon">🔍</span> Change Diff Viewer</div>
+            <div class="diff-container" id="diff-container">
+                <!-- Diffs injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
